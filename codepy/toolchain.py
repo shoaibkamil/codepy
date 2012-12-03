@@ -429,6 +429,10 @@ def guess_toolchain():
                 kwargs["cflags"].extend(['-arch', 'i386'])
 
         return GCCToolchain(**kwargs)
+
+    if "clang" in version:
+        return GCCToolchain(**kwargs)
+
     else:
         raise ToolchainGuessError("unknown compiler")
 
