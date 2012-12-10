@@ -382,6 +382,11 @@ def _guess_toolchain_kwargs_from_python_config():
         else:
             cflags.append(lib)
 
+    # need to add a workaround for bug at
+    # http://bugs.python.org/issue3588
+    if "PYTHONFRAMEWORKPREFIX" in make_vars:
+        cflags.append("-F"+make_vars["PYTHONFRAMEWORKPREFIX"])
+
     return dict(
             cc=cc_cmdline[0],
             ld=make_vars["LDSHARED"].split()[0],
